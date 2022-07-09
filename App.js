@@ -1,14 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { View, FlatList, StyleSheet, SafeAreaView } from "react-native";
+import { FlashList } from "@shopify/flash-list";
+import { tweets } from "./tweets";
+import TweetCard from "./src/components/TweetCard";
+
+const MyList = () => {
+  return (
+    <FlashList
+      data={tweets}
+      contentContainerStyle={{backgroundColor: 'aliceblue', paddingVertical: 50}}
+      renderItem={({item}) => <TweetCard {...item} />}
+      estimatedItemSize={200}
+      numColumns={1}
+    />
+  );
+};
+
+const MyFlat = () => {
+  return (
+    <FlatList
+      data={tweets}
+      contentContainerStyle={{backgroundColor: 'aliceblue', paddingVertical: 50}}
+      renderItem={({item}) => <TweetCard {...item} />}
+      numColumns={1}
+    />
+  );
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+      <MyList />
+      // <MyFlat />
+    );
 }
 
 const styles = StyleSheet.create({
